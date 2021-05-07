@@ -38,7 +38,16 @@ export function updateQuality(items) {
       }
     }
 
-    if ([AGED_BRIE, BACKSTAGE].includes(item.name)) {
+    if (SULFURAS === item.name) {
+      if (item.quality < 50) {
+        item.quality = item.quality + 1
+      }
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality = item.quality - item.quality
+      }
+    }
+
+    if (BACKSTAGE === item.name) {
       if (item.quality < 50) {
         item.quality = item.quality + 1
 
@@ -56,24 +65,31 @@ export function updateQuality(items) {
       if (item.quality > 50) {
         item.quality = 50
       }
-    }
 
-    if (SULFURAS === item.name) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1
-      }
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = item.quality - item.quality
-      }
-    }
-
-    if (BACKSTAGE === item.name) {
       if (item.sellIn < 0 && item.quality > 0) {
         item.quality = item.quality - item.quality
       }
     }
 
     if (AGED_BRIE === item.name) {
+      if (item.quality < 50) {
+        item.quality = item.quality + 1
+
+        if (item.sellIn < 11) {
+          item.quality = item.quality + 1
+        }
+
+        if (item.sellIn < 6) {
+          item.quality = item.quality + 1
+        }
+      }
+
+      item.sellIn = item.sellIn - 1
+
+      if (item.quality > 50) {
+        item.quality = 50
+      }
+
       if (item.sellIn < 0 && item.quality < 50) {
         item.quality = item.quality + 1
       }
