@@ -94,7 +94,7 @@ export function updateQuality(items) {
         item.quality = item.quality + 1
       }
 
-      if (item.sellIn < 0 && item.sellIn <= 0) {
+      if (item.sellIn <= 0) {
         item.quality = 0
       }
     }
