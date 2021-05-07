@@ -18,86 +18,97 @@ var GildedRose = function () {
   updateQuality(items)
 }
 
+const processConjured = item => {
+  if (item.quality > 0) {
+    item.quality = item.quality - 1
+  }
+
+  item.sellIn = item.sellIn - 1
+
+  if (item.quality > 50) {
+    item.quality = 50
+  }
+
+  if (item.sellIn < 0 && item.quality > 0) {
+    item.quality = item.quality - 1
+  }
+}
+
+const processSulfuras = item => {
+  if (item.quality < 50) {
+    item.quality = item.quality + 1
+  }
+  if (item.sellIn < 0 && item.quality > 0) {
+    item.quality = item.quality - item.quality
+  }
+}
+
+const processAged = item => {
+  if (item.quality < 50) {
+    item.quality = item.quality + 1
+
+    if (item.sellIn < 11) {
+      item.quality = item.quality + 1
+    }
+
+    if (item.sellIn < 6) {
+      item.quality = item.quality + 1
+    }
+  }
+
+  item.sellIn = item.sellIn - 1
+
+  if (item.quality > 50) {
+    item.quality = 50
+  }
+
+  if (item.sellIn < 0 && item.quality < 50) {
+    item.quality = item.quality + 1
+  }
+
+  if (item.sellIn <= 0) {
+    item.quality = 0
+  }
+}
+
+const processBackstage = item => {
+  if (item.quality < 50) {
+    item.quality = item.quality + 1
+
+    if (item.sellIn < 11) {
+      item.quality = item.quality + 1
+    }
+
+    if (item.sellIn < 6) {
+      item.quality = item.quality + 1
+    }
+  }
+
+  item.sellIn = item.sellIn - 1
+
+  if (item.quality > 50) {
+    item.quality = 50
+  }
+
+  if (item.sellIn <= 0) {
+    item.quality = 0
+  }
+}
+
+const PROCESSORS_MAP = {
+  [SULFURAS]: processSulfuras,
+  [AGED_BRIE]: processAged,
+  [BACKSTAGE]: processBackstage,
+  [DEXTERITY]: processConjured,
+  [ELIXIR]: processConjured,
+  [CONJURED]: processConjured
+}
+
 export function updateQuality(items) {
   for (var i = 0; i < items.length; i++) {
     const item = items[i]
 
-    if ([DEXTERITY, ELIXIR, CONJURED].includes(item.name)) {
-      if (item.quality > 0) {
-        item.quality = item.quality - 1
-      }
-
-      item.sellIn = item.sellIn - 1
-
-      if (item.quality > 50) {
-        item.quality = 50
-      }
-
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = item.quality - 1
-      }
-    }
-
-    if (SULFURAS === item.name) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1
-      }
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = item.quality - item.quality
-      }
-    }
-
-    if (BACKSTAGE === item.name) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1
-
-        if (item.sellIn < 11) {
-          item.quality = item.quality + 1
-        }
-
-        if (item.sellIn < 6) {
-          item.quality = item.quality + 1
-        }
-      }
-
-      item.sellIn = item.sellIn - 1
-
-      if (item.quality > 50) {
-        item.quality = 50
-      }
-
-      if (item.sellIn < 0) {
-        item.quality = 0
-      }
-    }
-
-    if (AGED_BRIE === item.name) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1
-
-        if (item.sellIn < 11) {
-          item.quality = item.quality + 1
-        }
-
-        if (item.sellIn < 6) {
-          item.quality = item.quality + 1
-        }
-      }
-
-      item.sellIn = item.sellIn - 1
-
-      if (item.quality > 50) {
-        item.quality = 50
-      }
-
-      if (item.sellIn < 0 && item.quality < 50) {
-        item.quality = item.quality + 1
-      }
-
-      if (item.sellIn <= 0) {
-        item.quality = 0
-      }
-    }
+    PROCESSORS_MAP[item.name](item)
   }
 
   return items
