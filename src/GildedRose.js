@@ -58,7 +58,7 @@ export function updateQuality(items) {
       }
     }
 
-    if (BACKSTAGE === item.name || SULFURAS === item.name) {
+    if ([SULFURAS, BACKSTAGE].includes(item.name)) {
       if (item.sellIn < 0 && item.quality > 0) {
         item.quality = item.quality - item.quality
       }
