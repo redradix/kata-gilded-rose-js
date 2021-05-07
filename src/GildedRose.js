@@ -30,22 +30,13 @@ export function updateQuality(items) {
 
     if ([AGED_BRIE, BACKSTAGE, SULFURAS].includes(item.name)) {
       if (item.quality < 50) {
-
         item.quality = item.quality + 1
 
-        if (AGED_BRIE === item.name && item.sellIn < 6) {
+        if ([AGED_BRIE, BACKSTAGE].includes(item.name) && item.sellIn < 11) {
           item.quality = item.quality + 1
         }
 
-        if (AGED_BRIE === item.name && item.sellIn < 11) {
-          item.quality = item.quality + 1
-        }
-
-        if (BACKSTAGE === item.name && item.sellIn < 11) {
-          item.quality = item.quality + 1
-        }
-
-        if (BACKSTAGE === item.name && item.sellIn < 6) {
+        if ([AGED_BRIE, BACKSTAGE].includes(item.name) && item.sellIn < 6) {
           item.quality = item.quality + 1
         }
       }
