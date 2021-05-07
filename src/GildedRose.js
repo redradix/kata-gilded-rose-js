@@ -52,27 +52,25 @@ export function updateQuality(items) {
       item.sellIn = item.sellIn - 1
     }
 
-    if (item.sellIn < 0) {
-      if (![AGED_BRIE, BACKSTAGE, SULFURAS].includes(item.name)) {
-        if (item.quality > 0) {
-          item.quality = item.quality - 1
-        }
+    if (![AGED_BRIE, BACKSTAGE, SULFURAS].includes(item.name)) {
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality = item.quality - 1
+      }
+    }
+
+    if (BACKSTAGE === item.name || SULFURAS === item.name) {
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality = item.quality - item.quality
+      }
+    }
+
+    if (AGED_BRIE === item.name) {
+      if (item.sellIn < 0 && item.quality < 50) {
+        item.quality = item.quality + 1
       }
 
-      if (BACKSTAGE === item.name || SULFURAS === item.name) {
-        if (item.quality > 0) {
-          item.quality = item.quality - item.quality
-        }
-      }
-
-      if (AGED_BRIE === item.name) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1
-        }
-
-        if (item.sellIn <= 0) {
-          item.quality = 0
-        }
+      if (item.sellIn < 0 && item.sellIn <= 0) {
+        item.quality = 0
       }
     }
 
