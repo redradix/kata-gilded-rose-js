@@ -70,7 +70,7 @@ export function updateQuality(items) {
           item.quality = item.quality + 1
         }
 
-        if (AGED_BRIE === item.name && item.sellIn <= 0) {
+        if (item.sellIn <= 0) {
           item.quality = 0
         }
       }
