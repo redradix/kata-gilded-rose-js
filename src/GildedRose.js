@@ -50,19 +50,17 @@ export function updateQuality(items) {
           item.quality = item.quality + 1
         }
       }
+
+      item.sellIn = item.sellIn - 1
+
+      if (item.quality > 50) {
+        item.quality = 50
+      }
     }
 
     if (SULFURAS === item.name) {
       if (item.quality < 50) {
         item.quality = item.quality + 1
-      }
-    }
-
-    if ([AGED_BRIE, BACKSTAGE].includes(item.name)) {
-      item.sellIn = item.sellIn - 1
-
-      if (item.quality > 50) {
-        item.quality = 50
       }
     }
 
