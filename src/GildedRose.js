@@ -28,17 +28,23 @@ export function updateQuality(items) {
       }
     }
 
-    if ([AGED_BRIE, BACKSTAGE, SULFURAS].includes(item.name)) {
+    if ([AGED_BRIE, BACKSTAGE].includes(item.name)) {
       if (item.quality < 50) {
         item.quality = item.quality + 1
 
-        if ([AGED_BRIE, BACKSTAGE].includes(item.name) && item.sellIn < 11) {
+        if (item.sellIn < 11) {
           item.quality = item.quality + 1
         }
 
-        if ([AGED_BRIE, BACKSTAGE].includes(item.name) && item.sellIn < 6) {
+        if (item.sellIn < 6) {
           item.quality = item.quality + 1
         }
+      }
+    }
+
+    if (SULFURAS === item.name) {
+      if (item.quality < 50) {
+        item.quality = item.quality + 1
       }
     }
 
