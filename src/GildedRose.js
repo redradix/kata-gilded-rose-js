@@ -22,7 +22,7 @@ export function updateQuality(items) {
   for (var i = 0; i < items.length; i++) {
     const item = items[i]
 
-    if (![AGED_BRIE, BACKSTAGE, SULFURAS].includes(item.name)) {
+    if ([DEXTERITY, ELIXIR, CONJURED].includes(item.name)) {
       if (item.quality > 0) {
         item.quality = item.quality - 1
       }
@@ -48,11 +48,11 @@ export function updateQuality(items) {
       }
     }
 
-    if (SULFURAS !== item.name) {
+    if ([DEXTERITY, ELIXIR, CONJURED, AGED_BRIE, BACKSTAGE].includes(item.name)) {
       item.sellIn = item.sellIn - 1
     }
 
-    if (![AGED_BRIE, BACKSTAGE, SULFURAS].includes(item.name)) {
+    if ([DEXTERITY, ELIXIR, CONJURED].includes(item.name)) {
       if (item.sellIn < 0 && item.quality > 0) {
         item.quality = item.quality - 1
       }
@@ -74,8 +74,10 @@ export function updateQuality(items) {
       }
     }
 
-    if (SULFURAS !== item.name && item.quality > 50) {
-      item.quality = 50
+    if ([DEXTERITY, ELIXIR, CONJURED, AGED_BRIE, BACKSTAGE].includes(item.name)) {
+      if (item.quality > 50) {
+        item.quality = 50
+      }
     }
   }
 
