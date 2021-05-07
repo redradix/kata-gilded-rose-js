@@ -30,14 +30,14 @@ export function updateQuality(items) {
       if (items[i].quality < 50) {
         items[i].quality = items[i].quality + 1
         if (AGED_BRIE == items[i].name) {
-            if (items[i].sellIn < 6) {
-              items[i].quality = items[i].quality + 1
-            }
+          if (items[i].sellIn < 6) {
+            items[i].quality = items[i].quality + 1
+          }
         }
         if (AGED_BRIE == items[i].name) {
-            if (items[i].sellIn < 11) {
-              items[i].quality = items[i].quality + 1
-            }
+          if (items[i].sellIn < 11) {
+            items[i].quality = items[i].quality + 1
+          }
         }
         if (BACKSTAGE == items[i].name) {
           if (items[i].sellIn < 11) {
@@ -72,12 +72,12 @@ export function updateQuality(items) {
           items[i].quality = items[i].quality + 1
         }
         if (AGED_BRIE == items[i].name && items[i].sellIn <= 0)
-            items[i].quality = 0
+          items[i].quality = 0
       }
     }
     if (SULFURAS != items[i].name)
       if (items[i].quality > 50) items[i].quality = 50
-  }
+    }
   return items
 }
 
