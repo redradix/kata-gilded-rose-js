@@ -20,10 +20,8 @@ var GildedRose = function () {
 
 export function updateQuality(items) {
   for (var i = 0; i < items.length; i++) {
-    if (AGED_BRIE !== items[i].name && BACKSTAGE !== items[i].name) {
-      if (items[i].quality > 0 && SULFURAS !== items[i].name) {
-        items[i].quality = items[i].quality - 1
-      }
+    if (AGED_BRIE !== items[i].name && BACKSTAGE !== items[i].name && items[i].quality > 0 && SULFURAS !== items[i].name) {
+      items[i].quality = items[i].quality - 1
     } else {
       if (items[i].quality < 50) {
 
