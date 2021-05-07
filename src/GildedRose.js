@@ -20,8 +20,8 @@ var GildedRose = function () {
 
 export function updateQuality(items) {
   for (var i = 0; i < items.length; i++) {
-    if (AGED_BRIE != items[i].name && BACKSTAGE != items[i].name) {
-      if (items[i].quality > 0 && SULFURAS != items[i].name) {
+    if (AGED_BRIE !== items[i].name && BACKSTAGE !== items[i].name) {
+      if (items[i].quality > 0 && SULFURAS !== items[i].name) {
         items[i].quality = items[i].quality - 1
       }
     } else {
@@ -29,15 +29,15 @@ export function updateQuality(items) {
 
         items[i].quality = items[i].quality + 1
 
-        if (AGED_BRIE == items[i].name && items[i].sellIn < 6) {
+        if (AGED_BRIE === items[i].name && items[i].sellIn < 6) {
           items[i].quality = items[i].quality + 1
         }
 
-        if (AGED_BRIE == items[i].name && items[i].sellIn < 11) {
+        if (AGED_BRIE === items[i].name && items[i].sellIn < 11) {
           items[i].quality = items[i].quality + 1
         }
 
-        if (BACKSTAGE == items[i].name) {
+        if (BACKSTAGE === items[i].name) {
           if (items[i].sellIn < 11 && items[i].quality < 50) {
             items[i].quality = items[i].quality + 1
           }
@@ -49,13 +49,13 @@ export function updateQuality(items) {
       }
     }
 
-    if (SULFURAS != items[i].name) {
+    if (SULFURAS !== items[i].name) {
       items[i].sellIn = items[i].sellIn - 1
     }
 
     if (items[i].sellIn < 0) {
-      if (AGED_BRIE != items[i].name) {
-        if (BACKSTAGE != items[i].name && items[i].quality > 0 && SULFURAS != items[i].name) {
+      if (AGED_BRIE !== items[i].name) {
+        if (BACKSTAGE !== items[i].name && items[i].quality > 0 && SULFURAS !== items[i].name) {
           items[i].quality = items[i].quality - 1
         } else {
           items[i].quality = items[i].quality - items[i].quality
@@ -65,13 +65,13 @@ export function updateQuality(items) {
           items[i].quality = items[i].quality + 1
         }
 
-        if (AGED_BRIE == items[i].name && items[i].sellIn <= 0) {
+        if (AGED_BRIE === items[i].name && items[i].sellIn <= 0) {
           items[i].quality = 0
         }
       }
     }
 
-    if (SULFURAS != items[i].name && items[i].quality > 50) {
+    if (SULFURAS !== items[i].name && items[i].quality > 50) {
       items[i].quality = 50
     }
   }
