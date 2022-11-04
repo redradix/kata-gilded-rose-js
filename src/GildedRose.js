@@ -18,15 +18,15 @@ var GildedRose = function () {
   updateQuality(items);
 };
 
-const increaseQuality = (item) => {
-  return item.quality + 1;
+const increaseQuality = (quality) => {
+  return quality + 1;
 };
 
-const decreaseQuality = (item) => {
-  if (item.quality <= 0) {
-    return item.quality;
+const decreaseQuality = (quality) => {
+  if (quality <= 0) {
+    return quality;
   }
-  return item.quality - 1;
+  return quality - 1;
 };
 
 const correctMaximumQuality = (quality) => {
@@ -45,9 +45,9 @@ export function updateQuality(items) {
 
         item.sellIn--;
 
-        item.quality = decreaseQuality(item);
+        item.quality = decreaseQuality(item.quality);
         if (item.sellIn < 0) {
-          item.quality = decreaseQuality(item);
+          item.quality = decreaseQuality(item.quality);
         }
         break;
       }
@@ -57,9 +57,9 @@ export function updateQuality(items) {
 
         item.sellIn--;
 
-        item.quality = decreaseQuality(item);
+        item.quality = decreaseQuality(item.quality);
         if (item.sellIn < 0) {
-          item.quality = decreaseQuality(item);
+          item.quality = decreaseQuality(item.quality);
         }
         break;
       }
@@ -69,24 +69,24 @@ export function updateQuality(items) {
 
         item.sellIn--;
 
-        item.quality = decreaseQuality(item);
+        item.quality = decreaseQuality(item.quality);
         if (item.sellIn < 0) {
-          item.quality = decreaseQuality(item);
+          item.quality = decreaseQuality(item.quality);
         }
         break;
       }
 
       case AGED_BRIE: {
         if (item.quality < 50) {
-          item.quality = increaseQuality(item);
+          item.quality = increaseQuality(item.quality);
           if (item.sellIn < 6) {
-            item.quality = increaseQuality(item);
+            item.quality = increaseQuality(item.quality);
           }
           if (item.sellIn < 11) {
-            item.quality = increaseQuality(item);
+            item.quality = increaseQuality(item.quality);
           }
           if (item.sellIn < 0) {
-            item.quality = increaseQuality(item);
+            item.quality = increaseQuality(item.quality);
           }
         }
 
@@ -104,13 +104,13 @@ export function updateQuality(items) {
         item.quality = correctMaximumQuality(item.quality);
 
         if (item.quality < 50) {
-          item.quality = increaseQuality(item);
+          item.quality = increaseQuality(item.quality);
 
           if (item.sellIn < 6) {
-            item.quality = increaseQuality(item);
+            item.quality = increaseQuality(item.quality);
           }
           if (item.sellIn < 11) {
-            item.quality = increaseQuality(item);
+            item.quality = increaseQuality(item.quality);
           }
         }
 
