@@ -67,10 +67,10 @@ export function updateQuality(items) {
 
       case AGED_BRIE: {
         item.quality = increaseQuality(item.quality);
-        if (item.sellIn < 6) {
+        if (item.sellIn <= 5) {
           item.quality = increaseQuality(item.quality);
         }
-        if (item.sellIn < 11) {
+        if (item.sellIn <= 10) {
           item.quality = increaseQuality(item.quality);
         }
         if (item.sellIn < 0) {
@@ -87,16 +87,17 @@ export function updateQuality(items) {
 
       case BACKSTAGE: {
         item.quality = increaseQuality(item.quality);
-        if (item.sellIn < 6) {
+        if (item.sellIn <= 5) {
           item.quality = increaseQuality(item.quality);
         }
-        if (item.sellIn < 11) {
+        if (item.sellIn <= 10) {
           item.quality = increaseQuality(item.quality);
         }
 
         if (item.sellIn <= 0) {
           item.quality = 0;
         }
+
         item.sellIn--;
         break;
       }
