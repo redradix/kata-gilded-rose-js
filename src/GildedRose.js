@@ -33,13 +33,13 @@ export function updateQuality(items) {
   items.forEach((item) => {
     switch (item.name) {
       case DEXTERITY: {
-        item.quality = decreaseQuality(item);
-
-        item.sellIn--;
         if (item.quality > 50) {
           item.quality = 50;
         }
 
+        item.sellIn--;
+
+        item.quality = decreaseQuality(item);
         if (item.sellIn < 0) {
           item.quality = decreaseQuality(item);
         }
@@ -47,12 +47,13 @@ export function updateQuality(items) {
       }
 
       case ELIXIR: {
-        item.quality = decreaseQuality(item);
-        item.sellIn--;
         if (item.quality > 50) {
           item.quality = 50;
         }
 
+        item.sellIn--;
+
+        item.quality = decreaseQuality(item);
         if (item.sellIn < 0) {
           item.quality = decreaseQuality(item);
         }
@@ -60,12 +61,13 @@ export function updateQuality(items) {
       }
 
       case CONJURAS: {
-        item.quality = decreaseQuality(item);
-        item.sellIn--;
         if (item.quality > 50) {
           item.quality = 50;
         }
 
+        item.sellIn--;
+
+        item.quality = decreaseQuality(item);
         if (item.sellIn < 0) {
           item.quality = decreaseQuality(item);
         }
@@ -99,6 +101,10 @@ export function updateQuality(items) {
       }
 
       case BACKSTAGE: {
+        if (item.quality > 50) {
+          item.quality = 50;
+        }
+
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
 
@@ -109,24 +115,20 @@ export function updateQuality(items) {
             item.quality = increaseQuality(item);
           }
         }
+
         if (item.sellIn <= 0) {
           item.quality = 0;
         }
-
         item.sellIn--;
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
         break;
       }
 
-      case SULFURAS:
-        {
-          if (item.sellIn < 0) {
-            item.quality = 0;
-          }
+      case SULFURAS: {
+        if (item.sellIn < 0) {
+          item.quality = 0;
         }
         break;
+      }
     }
   });
   return items;
