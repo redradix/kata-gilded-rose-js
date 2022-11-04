@@ -70,7 +70,7 @@ export function updateQuality(items) {
       }
     }
 
-    if (SULFURAS !== item.name) {
+    if ([AGED_BRIE, BACKSTAGE, DEXTERITY, ELIXIR,CONJURAS].includes(item.name)) {
       item.sellIn = item.sellIn - 1;
       if (item.quality > 50) {
         item.quality = 50;
