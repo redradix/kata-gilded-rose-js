@@ -69,7 +69,8 @@ export function updateQuality(items) {
         } else {
           item.quality = item.quality - item.quality;
         }
-      } else {
+      }
+      if ((AGED_BRIE === item.name)) {
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
         }
