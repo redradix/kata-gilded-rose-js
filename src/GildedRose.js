@@ -29,7 +29,6 @@ const decreaseQuality = (item) => {
 export function updateQuality(items) {
   items.forEach((item) => {
     if (AGED_BRIE !== item.name && BACKSTAGE !== item.name) {
-      //TODO: Improve this code.
       if (item.quality > 0 && SULFURAS !== item.name) {
         item.quality = decreaseQuality(item);
       }
@@ -39,7 +38,6 @@ export function updateQuality(items) {
         if (AGED_BRIE === item.name && item.sellIn < 6) {
           item.quality = increaseQuality(item);
         }
-        //Increases the Quality of the stinky cheese if its 11 days to due date.
         if (AGED_BRIE === item.name && item.sellIn < 11) {
           item.quality = increaseQuality(item);
         }
@@ -47,7 +45,6 @@ export function updateQuality(items) {
           if (item.sellIn < 11 && item.quality < 50) {
             item.quality = increaseQuality(item);
           }
-          //Increases the Quality of Backstage Passes if the Quality is 6 or less.
           if (item.sellIn < 6 && item.quality < 50) {
             item.quality = increaseQuality(item);
           }
@@ -66,7 +63,6 @@ export function updateQuality(items) {
         ) {
           item.quality = decreaseQuality(item);
         } else {
-          //TODO: Fix this.
           item.quality = item.quality - item.quality;
         }
       } else {
@@ -76,7 +72,7 @@ export function updateQuality(items) {
         if (AGED_BRIE === item.name && item.sellIn <= 0) {
           item.quality = 0;
         }
-      } // of for.
+      }
     }
     if (SULFURAS !== item.name && item.quality > 50) {
       item.quality = 50;
