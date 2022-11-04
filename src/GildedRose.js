@@ -28,8 +28,8 @@ const decreaseQuality = (item) => {
 
 export function updateQuality(items) {
   items.forEach((item) => {
-    if (AGED_BRIE !== item.name && BACKSTAGE !== item.name) {
-      if (item.quality > 0 && SULFURAS !== item.name) {
+    if (AGED_BRIE !== item.name && BACKSTAGE !== item.name && SULFURAS !== item.name) {
+      if (item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
     }
