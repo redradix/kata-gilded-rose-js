@@ -20,58 +20,47 @@ const decreaseQuality = (item) => {
 };
 
 export function updateQuality(items) {
-  items.forEach(item => {
+  items.forEach((item) => {
     if (
-      "Aged Brie" != item.name &&
-      "Backstage passes to a TAFKAL80ETC concert" != item.name
+      "Aged Brie" !== item.name &&
+      "Backstage passes to a TAFKAL80ETC concert" !== item.name
     ) {
       //TODO: Improve this code.
-      if (item.quality > 0) {
-        if ("Sulfuras, Hand of Ragnaros" != item.name) {
-          item.quality = decreaseQuality(item);
-        }
+      if (item.quality > 0 && "Sulfuras, Hand of Ragnaros" !== item.name) {
+        item.quality = decreaseQuality(item);
       }
     } else {
       if (item.quality < 50) {
         item.quality = increaseQuality(item);
-        if ("Aged Brie" == item.name) {
-          if (item.sellIn < 6) {
-            item.quality = increaseQuality(item);
-          }
+        if ("Aged Brie" === item.name && item.sellIn < 6) {
+          item.quality = increaseQuality(item);
         }
         //Increases the Quality of the stinky cheese if its 11 days to due date.
-        if ("Aged Brie" == item.name) {
-          if (item.sellIn < 11) {
+        if ("Aged Brie" === item.name && item.sellIn < 11) {
+          item.quality = increaseQuality(item);
+        }
+        if ("Backstage passes to a TAFKAL80ETC concert" === item.name) {
+          if (item.sellIn < 11 && item.quality < 50) {
             item.quality = increaseQuality(item);
           }
-        }
-        if ("Backstage passes to a TAFKAL80ETC concert" == item.name) {
-          if (item.sellIn < 11) {
-            // See revision number 2394 on SVN.
-            if (item.quality < 50) {
-              item.quality = increaseQuality(item);
-            }
-          }
           //Increases the Quality of Backstage Passes if the Quality is 6 or less.
-          if (item.sellIn < 6) {
-            if (item.quality < 50) {
-              item.quality = increaseQuality(item);
-            }
+          if (item.sellIn < 6 && item.quality < 50) {
+            item.quality = increaseQuality(item);
           }
         }
       }
     }
-    if ("Sulfuras, Hand of Ragnaros" != item.name) {
+    if ("Sulfuras, Hand of Ragnaros" !== item.name) {
       item.sellIn = item.sellIn - 1;
     }
     if (item.sellIn < 0) {
-      if ("Aged Brie" != item.name) {
-        if ("Backstage passes to a TAFKAL80ETC concert" != item.name) {
-          if (item.quality > 0) {
-            if ("Sulfuras, Hand of Ragnaros" != item.name) {
-              item.quality = decreaseQuality(item);
-            }
-          }
+      if ("Aged Brie" !== item.name) {
+        if (
+          "Backstage passes to a TAFKAL80ETC concert" !== item.name &&
+          item.quality > 0 &&
+          "Sulfuras, Hand of Ragnaros" !== item.name
+        ) {
+          item.quality = decreaseQuality(item);
         } else {
           //TODO: Fix this.
           item.quality = item.quality - item.quality;
@@ -80,13 +69,13 @@ export function updateQuality(items) {
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
         }
-        if ("Aged Brie" == item.name && item.sellIn <= 0)
-          item.quality = 0;
+        if ("Aged Brie" === item.name && item.sellIn <= 0) item.quality = 0;
       } // of for.
     }
-    if ("Sulfuras, Hand of Ragnaros" != item.name)
-      if (item.quality > 50) item.quality = 50;
-  })
+    if ("Sulfuras, Hand of Ragnaros" !== item.name && item.quality > 50) {
+      item.quality = 50;
+    }
+  });
   return items;
 }
 
