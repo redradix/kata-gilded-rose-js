@@ -32,21 +32,27 @@ export function updateQuality(items) {
       if (item.quality > 0 && SULFURAS !== item.name) {
         item.quality = decreaseQuality(item);
       }
-    } else {
+    }
+
+    if ((AGED_BRIE === item.name || BACKSTAGE === item.name)) {
       if (item.quality < 50) {
         item.quality = increaseQuality(item);
-        if (AGED_BRIE === item.name && item.sellIn < 6) {
-          item.quality = increaseQuality(item);
-        }
-        if (AGED_BRIE === item.name && item.sellIn < 11) {
-          item.quality = increaseQuality(item);
-        }
-        if (BACKSTAGE === item.name) {
-          if (item.sellIn < 11 && item.quality < 50) {
+        if (AGED_BRIE === item.name) {
+          if (item.sellIn < 6) {
             item.quality = increaseQuality(item);
           }
-          if (item.sellIn < 6 && item.quality < 50) {
+          if (item.sellIn < 11) {
             item.quality = increaseQuality(item);
+          }
+        }
+        if (BACKSTAGE === item.name) {
+          if (item.quality < 50) {
+            if (item.sellIn < 11) {
+              item.quality = increaseQuality(item);
+            }
+            if (item.sellIn < 6) {
+              item.quality = increaseQuality(item);
+            }
           }
         }
       }
