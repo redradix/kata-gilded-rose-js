@@ -23,55 +23,53 @@ const increaseQuality = (item) => {
 };
 
 const decreaseQuality = (item) => {
+  if (item.quality <= 0) {
+    return item.quality;
+  }
   return item.quality - 1;
 };
 
 export function updateQuality(items) {
   items.forEach((item) => {
-    switch(item.name) {
+    switch (item.name) {
       case DEXTERITY: {
-        if (item.quality > 0) {
-          item.quality = decreaseQuality(item);
-        }
+        item.quality = decreaseQuality(item);
+
         item.sellIn--;
         if (item.quality > 50) {
           item.quality = 50;
         }
 
-        if (item.sellIn < 0 && item.quality > 0) {
+        if (item.sellIn < 0) {
           item.quality = decreaseQuality(item);
         }
-        break
+        break;
       }
 
       case ELIXIR: {
-        if (item.quality > 0) {
-          item.quality = decreaseQuality(item);
-        }
+        item.quality = decreaseQuality(item);
         item.sellIn--;
         if (item.quality > 50) {
           item.quality = 50;
         }
 
-        if (item.sellIn < 0 && item.quality > 0) {
+        if (item.sellIn < 0) {
           item.quality = decreaseQuality(item);
         }
-        break
+        break;
       }
 
       case CONJURAS: {
-        if (item.quality > 0) {
-          item.quality = decreaseQuality(item);
-        }
+        item.quality = decreaseQuality(item);
         item.sellIn--;
         if (item.quality > 50) {
           item.quality = 50;
         }
 
-        if (item.sellIn < 0 && item.quality > 0) {
+        if (item.sellIn < 0) {
           item.quality = decreaseQuality(item);
         }
-        break
+        break;
       }
 
       case AGED_BRIE: {
@@ -97,7 +95,7 @@ export function updateQuality(items) {
         if (item.quality > 50) {
           item.quality = 50;
         }
-        break
+        break;
       }
 
       case BACKSTAGE: {
@@ -119,16 +117,17 @@ export function updateQuality(items) {
         if (item.quality > 50) {
           item.quality = 50;
         }
-        break
+        break;
       }
 
-      case SULFURAS: {
+      case SULFURAS:
+        {
           if (item.sellIn < 0) {
             item.quality = 0;
           }
         }
-        break
-      }
+        break;
+    }
   });
   return items;
 }
