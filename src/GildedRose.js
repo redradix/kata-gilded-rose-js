@@ -35,6 +35,9 @@ export function updateQuality(items) {
     }
 
     if (AGED_BRIE === item.name) {
+      if (item.sellIn < 0) {
+        item.quality = 0;
+      }
       if (item.quality < 50) {
         item.quality = increaseQuality(item);
 
@@ -80,11 +83,7 @@ export function updateQuality(items) {
       }
     }
 
-    if (
-      AGED_BRIE === item.name ||
-      BACKSTAGE === item.name ||
-      SULFURAS === item.name
-    ) {
+    if (BACKSTAGE === item.name || SULFURAS === item.name) {
       if (item.sellIn < 0) {
         item.quality = 0;
       }
