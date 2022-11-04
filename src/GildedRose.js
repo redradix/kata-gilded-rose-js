@@ -69,7 +69,9 @@ export function updateQuality(items) {
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
         }
-        if ("Aged Brie" === item.name && item.sellIn <= 0) item.quality = 0;
+        if ("Aged Brie" === item.name && item.sellIn <= 0) {
+          item.quality = 0;
+        }
       } // of for.
     }
     if ("Sulfuras, Hand of Ragnaros" !== item.name && item.quality > 50) {
