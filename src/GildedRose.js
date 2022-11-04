@@ -15,6 +15,10 @@ const increaseQuality = (item) => {
   return item.quality + 1;
 };
 
+const decreaseQuality = (item) => {
+  return item.quality - 1;
+};
+
 export function updateQuality(items) {
   for (var i = 0; i < items.length; i++) {
     if (
@@ -24,7 +28,7 @@ export function updateQuality(items) {
       //TODO: Improve this code.
       if (items[i].quality > 0) {
         if ("Sulfuras, Hand of Ragnaros" != items[i].name) {
-          items[i].quality = items[i].quality - 1;
+          items[i].quality = decreaseQuality(items[i]);
         }
       }
     } else {
@@ -65,7 +69,7 @@ export function updateQuality(items) {
         if ("Backstage passes to a TAFKAL80ETC concert" != items[i].name) {
           if (items[i].quality > 0) {
             if ("Sulfuras, Hand of Ragnaros" != items[i].name) {
-              items[i].quality = items[i].quality - 1;
+              items[i].quality = decreaseQuality(items[i]);
             }
           }
         } else {
