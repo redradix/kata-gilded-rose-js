@@ -28,7 +28,7 @@ const decreaseQuality = (item) => {
 
 export function updateQuality(items) {
   items.forEach((item) => {
-    if (AGED_BRIE !== item.name && BACKSTAGE !== item.name && SULFURAS !== item.name) {
+    if ([DEXTERITY, ELIXIR, CONJURAS].includes(item.name)) {
       if (item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
@@ -71,11 +71,7 @@ export function updateQuality(items) {
       item.sellIn = item.sellIn - 1;
     }
 
-    if (
-      AGED_BRIE !== item.name &&
-      BACKSTAGE !== item.name &&
-      SULFURAS !== item.name
-    ) {
+    if ([DEXTERITY, ELIXIR, CONJURAS].includes(item.name)) {
       if (item.sellIn < 0 && item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
