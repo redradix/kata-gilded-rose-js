@@ -19,14 +19,11 @@ var GildedRose = function () {
 };
 
 const increaseQuality = (quality, quantity = 1) => {
-  return Math.min(quality + quantity, 50)
+  return Math.min(50, quality + quantity)
 };
 
 const decreaseQuality = (quality) => {
-  if (quality <= 0) {
-    return quality;
-  }
-  return quality - 1;
+  return Math.max(0, quality - 1)
 };
 
 export function updateQuality(items) {
