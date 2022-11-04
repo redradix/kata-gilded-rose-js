@@ -79,7 +79,13 @@ export function updateQuality(items) {
       if (item.sellIn < 0 && item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
-    } else {
+    }
+
+    if (
+      AGED_BRIE === item.name ||
+      BACKSTAGE === item.name ||
+      SULFURAS === item.name
+    ) {
       if (item.sellIn < 0) {
         item.quality = 0;
       }
