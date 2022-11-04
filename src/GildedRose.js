@@ -71,17 +71,18 @@ export function updateQuality(items) {
       item.sellIn = item.sellIn - 1;
     }
 
-    if (item.sellIn < 0) {
-      if (AGED_BRIE !== item.name) {
-        if (
-          BACKSTAGE !== item.name &&
-          item.quality > 0 &&
-          SULFURAS !== item.name
-        ) {
-          item.quality = decreaseQuality(item);
-        } else {
-          item.quality = 0;
-        }
+    if (
+      AGED_BRIE !== item.name &&
+      BACKSTAGE !== item.name &&
+      SULFURAS !== item.name &&
+      item.quality > 0
+    ) {
+      if (item.sellIn < 0) {
+        item.quality = decreaseQuality(item);
+      }
+    } else {
+      if (item.sellIn < 0) {
+        item.quality = 0;
       }
     }
 
