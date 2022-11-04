@@ -74,10 +74,9 @@ export function updateQuality(items) {
     if (
       AGED_BRIE !== item.name &&
       BACKSTAGE !== item.name &&
-      SULFURAS !== item.name &&
-      item.quality > 0
+      SULFURAS !== item.name
     ) {
-      if (item.sellIn < 0) {
+      if (item.sellIn < 0 && item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
     } else {
