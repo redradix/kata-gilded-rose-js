@@ -22,8 +22,8 @@ const increaseQuality = (quality, quantity = 1) => {
   return Math.min(50, quality + quantity)
 };
 
-const decreaseQuality = (quality) => {
-  return Math.max(0, quality - 1)
+const decreaseQuality = (quality, quantity = 1) => {
+  return Math.max(0, quality - quantity)
 };
 
 export function updateQuality(items) {
@@ -32,9 +32,10 @@ export function updateQuality(items) {
       case DEXTERITY: {
         item.sellIn--;
 
-        item.quality = decreaseQuality(item.quality);
         if (item.sellIn < 0) {
-          item.quality = decreaseQuality(item.quality);
+          item.quality = decreaseQuality(item.quality, 2);
+        } else {
+          item.quality = decreaseQuality(item.quality, 1);
         }
         break;
       }
@@ -42,9 +43,10 @@ export function updateQuality(items) {
       case ELIXIR: {
         item.sellIn--;
 
-        item.quality = decreaseQuality(item.quality);
         if (item.sellIn < 0) {
-          item.quality = decreaseQuality(item.quality);
+          item.quality = decreaseQuality(item.quality, 2);
+        } else {
+          item.quality = decreaseQuality(item.quality, 1);
         }
         break;
       }
@@ -52,9 +54,10 @@ export function updateQuality(items) {
       case CONJURAS: {
         item.sellIn--;
 
-        item.quality = decreaseQuality(item.quality);
         if (item.sellIn < 0) {
-          item.quality = decreaseQuality(item.quality);
+          item.quality = decreaseQuality(item.quality, 2);
+        } else {
+          item.quality = decreaseQuality(item.quality, 1);
         }
         break;
       }
