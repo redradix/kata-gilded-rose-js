@@ -1,13 +1,20 @@
 import Item from "./Item";
 
+const AGED_BRIE = "Aged Brie";
+const BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
+const DEXTERITY = "+5 Dexterity Vest";
+const ELIXIR = "Elixir of the Mongoose";
+const SULFURAS = "Sulfuras, Hand of Ragnaros";
+const CONJURAS = "Conjured Mana Cake";
+
 var GildedRose = function () {
   var items = [];
-  items.push(new Item("+5 Dexterity Vest", 10, 20));
-  items.push(new Item("Aged Brie", 2, 0));
-  items.push(new Item("Elixir of the Mongoose", 5, 7));
-  items.push(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
-  items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
-  items.push(new Item("Conjured Mana Cake", 3, 6));
+  items.push(new Item(DEXTERITY, 10, 20));
+  items.push(new Item(AGED_BRIE, 2, 0));
+  items.push(new Item(ELIXIR, 5, 7));
+  items.push(new Item(SULFURAS, 0, 80));
+  items.push(new Item(BACKSTAGE, 15, 20));
+  items.push(new Item(CONJURAS, 3, 6));
   updateQuality(items);
 };
 
@@ -21,25 +28,22 @@ const decreaseQuality = (item) => {
 
 export function updateQuality(items) {
   items.forEach((item) => {
-    if (
-      "Aged Brie" !== item.name &&
-      "Backstage passes to a TAFKAL80ETC concert" !== item.name
-    ) {
+    if (AGED_BRIE !== item.name && BACKSTAGE !== item.name) {
       //TODO: Improve this code.
-      if (item.quality > 0 && "Sulfuras, Hand of Ragnaros" !== item.name) {
+      if (item.quality > 0 && SULFURAS !== item.name) {
         item.quality = decreaseQuality(item);
       }
     } else {
       if (item.quality < 50) {
         item.quality = increaseQuality(item);
-        if ("Aged Brie" === item.name && item.sellIn < 6) {
+        if (AGED_BRIE === item.name && item.sellIn < 6) {
           item.quality = increaseQuality(item);
         }
         //Increases the Quality of the stinky cheese if its 11 days to due date.
-        if ("Aged Brie" === item.name && item.sellIn < 11) {
+        if (AGED_BRIE === item.name && item.sellIn < 11) {
           item.quality = increaseQuality(item);
         }
-        if ("Backstage passes to a TAFKAL80ETC concert" === item.name) {
+        if (BACKSTAGE === item.name) {
           if (item.sellIn < 11 && item.quality < 50) {
             item.quality = increaseQuality(item);
           }
@@ -50,15 +54,15 @@ export function updateQuality(items) {
         }
       }
     }
-    if ("Sulfuras, Hand of Ragnaros" !== item.name) {
+    if (SULFURAS !== item.name) {
       item.sellIn = item.sellIn - 1;
     }
     if (item.sellIn < 0) {
-      if ("Aged Brie" !== item.name) {
+      if (AGED_BRIE !== item.name) {
         if (
-          "Backstage passes to a TAFKAL80ETC concert" !== item.name &&
+          BACKSTAGE !== item.name &&
           item.quality > 0 &&
-          "Sulfuras, Hand of Ragnaros" !== item.name
+          SULFURAS !== item.name
         ) {
           item.quality = decreaseQuality(item);
         } else {
@@ -69,12 +73,12 @@ export function updateQuality(items) {
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
         }
-        if ("Aged Brie" === item.name && item.sellIn <= 0) {
+        if (AGED_BRIE === item.name && item.sellIn <= 0) {
           item.quality = 0;
         }
       } // of for.
     }
-    if ("Sulfuras, Hand of Ragnaros" !== item.name && item.quality > 50) {
+    if (SULFURAS !== item.name && item.quality > 50) {
       item.quality = 50;
     }
   });
