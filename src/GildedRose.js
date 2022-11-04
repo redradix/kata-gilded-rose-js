@@ -45,6 +45,13 @@ export function updateQuality(items) {
           item.quality = increaseQuality(item);
         }
       }
+
+      if (item.sellIn < 0 && item.quality < 50) {
+        item.quality = increaseQuality(item);
+      }
+      if (item.sellIn <= 0) {
+        item.quality = 0;
+      }
     }
 
     if (BACKSTAGE === item.name) {
@@ -59,9 +66,11 @@ export function updateQuality(items) {
         }
       }
     }
+
     if (SULFURAS !== item.name) {
       item.sellIn = item.sellIn - 1;
     }
+
     if (item.sellIn < 0) {
       if (AGED_BRIE !== item.name) {
         if (
@@ -71,18 +80,11 @@ export function updateQuality(items) {
         ) {
           item.quality = decreaseQuality(item);
         } else {
-          item.quality = item.quality - item.quality;
-        }
-      }
-      if (AGED_BRIE === item.name) {
-        if (item.quality < 50) {
-          item.quality = increaseQuality(item);
-        }
-        if (AGED_BRIE === item.name && item.sellIn <= 0) {
           item.quality = 0;
         }
       }
     }
+
     if (SULFURAS !== item.name && item.quality > 50) {
       item.quality = 50;
     }
