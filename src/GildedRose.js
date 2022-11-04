@@ -46,13 +46,11 @@ export function updateQuality(items) {
           }
         }
         if (BACKSTAGE === item.name) {
-          if (item.quality < 50) {
-            if (item.sellIn < 11) {
-              item.quality = increaseQuality(item);
-            }
-            if (item.sellIn < 6) {
-              item.quality = increaseQuality(item);
-            }
+          if (item.sellIn < 11) {
+            item.quality = increaseQuality(item);
+          }
+          if (item.sellIn < 6) {
+            item.quality = increaseQuality(item);
           }
         }
       }
