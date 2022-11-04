@@ -19,6 +19,9 @@ var GildedRose = function () {
 };
 
 const increaseQuality = (quality) => {
+  if (quality >= 50) {
+    return quality
+  }
   return quality + 1;
 };
 
@@ -77,17 +80,17 @@ export function updateQuality(items) {
       }
 
       case AGED_BRIE: {
-        if (item.quality < 50) {
+        item.quality = correctMaximumQuality(item.quality);
+
+        item.quality = increaseQuality(item.quality);
+        if (item.sellIn < 6) {
           item.quality = increaseQuality(item.quality);
-          if (item.sellIn < 6) {
-            item.quality = increaseQuality(item.quality);
-          }
-          if (item.sellIn < 11) {
-            item.quality = increaseQuality(item.quality);
-          }
-          if (item.sellIn < 0) {
-            item.quality = increaseQuality(item.quality);
-          }
+        }
+        if (item.sellIn < 11) {
+          item.quality = increaseQuality(item.quality);
+        }
+        if (item.sellIn < 0) {
+          item.quality = increaseQuality(item.quality);
         }
 
         if (item.sellIn <= 0) {
@@ -95,23 +98,18 @@ export function updateQuality(items) {
         }
 
         item.sellIn--;
-
-        item.quality = correctMaximumQuality(item.quality);
         break;
       }
 
       case BACKSTAGE: {
         item.quality = correctMaximumQuality(item.quality);
 
-        if (item.quality < 50) {
+        item.quality = increaseQuality(item.quality);
+        if (item.sellIn < 6) {
           item.quality = increaseQuality(item.quality);
-
-          if (item.sellIn < 6) {
-            item.quality = increaseQuality(item.quality);
-          }
-          if (item.sellIn < 11) {
-            item.quality = increaseQuality(item.quality);
-          }
+        }
+        if (item.sellIn < 11) {
+          item.quality = increaseQuality(item.quality);
         }
 
         if (item.sellIn <= 0) {
