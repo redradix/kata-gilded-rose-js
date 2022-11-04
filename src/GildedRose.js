@@ -32,6 +32,14 @@ export function updateQuality(items) {
       if (item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
+      item.sellIn--;
+      if (item.quality > 50) {
+        item.quality = 50;
+      }
+
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality = decreaseQuality(item);
+      }
     }
 
     if (AGED_BRIE === item.name) {
@@ -77,17 +85,6 @@ export function updateQuality(items) {
       item.sellIn--;
       if (item.quality > 50) {
         item.quality = 50;
-      }
-    }
-
-    if ([DEXTERITY, ELIXIR, CONJURAS].includes(item.name)) {
-      item.sellIn--;
-      if (item.quality > 50) {
-        item.quality = 50;
-      }
-
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = decreaseQuality(item);
       }
     }
 
