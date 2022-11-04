@@ -44,11 +44,11 @@ export function updateQuality(items) {
         if (item.sellIn < 11) {
           item.quality = increaseQuality(item);
         }
+        if (item.sellIn < 0) {
+          item.quality = increaseQuality(item);
+        }
       }
 
-      if (item.sellIn < 0 && item.quality < 50) {
-        item.quality = increaseQuality(item);
-      }
       if (item.sellIn <= 0) {
         item.quality = 0;
       }
