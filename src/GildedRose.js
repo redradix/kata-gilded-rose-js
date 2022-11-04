@@ -20,8 +20,7 @@ const decreaseQuality = (item) => {
 };
 
 export function updateQuality(items) {
-  for (var i = 0; i < items.length; i++) {
-    const item = items[i]
+  items.forEach(item => {
     if (
       "Aged Brie" != item.name &&
       "Backstage passes to a TAFKAL80ETC concert" != item.name
@@ -87,7 +86,7 @@ export function updateQuality(items) {
     }
     if ("Sulfuras, Hand of Ragnaros" != item.name)
       if (item.quality > 50) item.quality = 50;
-  }
+  })
   return items;
 }
 
