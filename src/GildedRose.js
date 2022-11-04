@@ -29,13 +29,19 @@ const decreaseQuality = (item) => {
   return item.quality - 1;
 };
 
+const correctMaximumQuality = (quality) => {
+  if (quality < 50) {
+    return quality
+  }
+
+  return 50
+}
+
 export function updateQuality(items) {
   items.forEach((item) => {
     switch (item.name) {
       case DEXTERITY: {
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+        item.quality = correctMaximumQuality(item.quality);
 
         item.sellIn--;
 
@@ -47,9 +53,7 @@ export function updateQuality(items) {
       }
 
       case ELIXIR: {
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+        item.quality = correctMaximumQuality(item.quality);
 
         item.sellIn--;
 
@@ -61,9 +65,7 @@ export function updateQuality(items) {
       }
 
       case CONJURAS: {
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+        item.quality = correctMaximumQuality(item.quality);
 
         item.sellIn--;
 
@@ -77,7 +79,6 @@ export function updateQuality(items) {
       case AGED_BRIE: {
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
-
           if (item.sellIn < 6) {
             item.quality = increaseQuality(item);
           }
@@ -94,16 +95,13 @@ export function updateQuality(items) {
         }
 
         item.sellIn--;
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+
+        item.quality = correctMaximumQuality(item.quality);
         break;
       }
 
       case BACKSTAGE: {
-        if (item.quality > 50) {
-          item.quality = 50;
-        }
+        item.quality = correctMaximumQuality(item.quality);
 
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
