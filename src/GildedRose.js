@@ -69,6 +69,9 @@ export function updateQuality(items) {
 
     if (SULFURAS !== item.name) {
       item.sellIn = item.sellIn - 1;
+      if (item.quality > 50) {
+        item.quality = 50;
+      }
     }
 
     if ([DEXTERITY, ELIXIR, CONJURAS].includes(item.name)) {
@@ -85,10 +88,6 @@ export function updateQuality(items) {
       if (item.sellIn < 0) {
         item.quality = 0;
       }
-    }
-
-    if (SULFURAS !== item.name && item.quality > 50) {
-      item.quality = 50;
     }
   });
   return items;
