@@ -32,20 +32,10 @@ const decreaseQuality = (quality) => {
   return quality - 1;
 };
 
-const correctMaximumQuality = (quality) => {
-  if (quality < 50) {
-    return quality
-  }
-
-  return 50
-}
-
 export function updateQuality(items) {
   items.forEach((item) => {
     switch (item.name) {
       case DEXTERITY: {
-        item.quality = correctMaximumQuality(item.quality);
-
         item.sellIn--;
 
         item.quality = decreaseQuality(item.quality);
@@ -56,8 +46,6 @@ export function updateQuality(items) {
       }
 
       case ELIXIR: {
-        item.quality = correctMaximumQuality(item.quality);
-
         item.sellIn--;
 
         item.quality = decreaseQuality(item.quality);
@@ -68,8 +56,6 @@ export function updateQuality(items) {
       }
 
       case CONJURAS: {
-        item.quality = correctMaximumQuality(item.quality);
-
         item.sellIn--;
 
         item.quality = decreaseQuality(item.quality);
@@ -80,8 +66,6 @@ export function updateQuality(items) {
       }
 
       case AGED_BRIE: {
-        item.quality = correctMaximumQuality(item.quality);
-
         item.quality = increaseQuality(item.quality);
         if (item.sellIn < 6) {
           item.quality = increaseQuality(item.quality);
@@ -102,8 +86,6 @@ export function updateQuality(items) {
       }
 
       case BACKSTAGE: {
-        item.quality = correctMaximumQuality(item.quality);
-
         item.quality = increaseQuality(item.quality);
         if (item.sellIn < 6) {
           item.quality = increaseQuality(item.quality);
