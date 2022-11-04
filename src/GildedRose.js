@@ -28,7 +28,35 @@ const decreaseQuality = (item) => {
 
 export function updateQuality(items) {
   items.forEach((item) => {
-    if ([DEXTERITY, ELIXIR, CONJURAS].includes(item.name)) {
+    if (DEXTERITY === item.name) {
+      if (item.quality > 0) {
+        item.quality = decreaseQuality(item);
+      }
+      item.sellIn--;
+      if (item.quality > 50) {
+        item.quality = 50;
+      }
+
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality = decreaseQuality(item);
+      }
+    }
+
+    if (ELIXIR === item.name) {
+      if (item.quality > 0) {
+        item.quality = decreaseQuality(item);
+      }
+      item.sellIn--;
+      if (item.quality > 50) {
+        item.quality = 50;
+      }
+
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality = decreaseQuality(item);
+      }
+    }
+
+    if (CONJURAS === item.name) {
       if (item.quality > 0) {
         item.quality = decreaseQuality(item);
       }
