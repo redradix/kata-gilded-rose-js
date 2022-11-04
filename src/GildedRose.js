@@ -28,99 +28,107 @@ const decreaseQuality = (item) => {
 
 export function updateQuality(items) {
   items.forEach((item) => {
-    if (DEXTERITY === item.name) {
-      if (item.quality > 0) {
-        item.quality = decreaseQuality(item);
-      }
-      item.sellIn--;
-      if (item.quality > 50) {
-        item.quality = 50;
-      }
-
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = decreaseQuality(item);
-      }
-    }
-
-    if (ELIXIR === item.name) {
-      if (item.quality > 0) {
-        item.quality = decreaseQuality(item);
-      }
-      item.sellIn--;
-      if (item.quality > 50) {
-        item.quality = 50;
-      }
-
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = decreaseQuality(item);
-      }
-    }
-
-    if (CONJURAS === item.name) {
-      if (item.quality > 0) {
-        item.quality = decreaseQuality(item);
-      }
-      item.sellIn--;
-      if (item.quality > 50) {
-        item.quality = 50;
-      }
-
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = decreaseQuality(item);
-      }
-    }
-
-    if (AGED_BRIE === item.name) {
-      if (item.quality < 50) {
-        item.quality = increaseQuality(item);
-
-        if (item.sellIn < 6) {
-          item.quality = increaseQuality(item);
+    switch(item.name) {
+      case DEXTERITY: {
+        if (item.quality > 0) {
+          item.quality = decreaseQuality(item);
         }
-        if (item.sellIn < 11) {
-          item.quality = increaseQuality(item);
+        item.sellIn--;
+        if (item.quality > 50) {
+          item.quality = 50;
         }
-        if (item.sellIn < 0) {
-          item.quality = increaseQuality(item);
+
+        if (item.sellIn < 0 && item.quality > 0) {
+          item.quality = decreaseQuality(item);
         }
+        break
       }
 
-      if (item.sellIn <= 0) {
-        item.quality = 0;
-      }
-
-      item.sellIn--;
-      if (item.quality > 50) {
-        item.quality = 50;
-      }
-    }
-
-    if (BACKSTAGE === item.name) {
-      if (item.quality < 50) {
-        item.quality = increaseQuality(item);
-
-        if (item.sellIn < 6) {
-          item.quality = increaseQuality(item);
+      case ELIXIR: {
+        if (item.quality > 0) {
+          item.quality = decreaseQuality(item);
         }
-        if (item.sellIn < 11) {
-          item.quality = increaseQuality(item);
+        item.sellIn--;
+        if (item.quality > 50) {
+          item.quality = 50;
         }
-      }
-      if (item.sellIn <= 0) {
-        item.quality = 0;
+
+        if (item.sellIn < 0 && item.quality > 0) {
+          item.quality = decreaseQuality(item);
+        }
+        break
       }
 
-      item.sellIn--;
-      if (item.quality > 50) {
-        item.quality = 50;
-      }
-    }
+      case CONJURAS: {
+        if (item.quality > 0) {
+          item.quality = decreaseQuality(item);
+        }
+        item.sellIn--;
+        if (item.quality > 50) {
+          item.quality = 50;
+        }
 
-    if (SULFURAS === item.name) {
-      if (item.sellIn < 0) {
-        item.quality = 0;
+        if (item.sellIn < 0 && item.quality > 0) {
+          item.quality = decreaseQuality(item);
+        }
+        break
       }
-    }
+
+      case AGED_BRIE: {
+        if (item.quality < 50) {
+          item.quality = increaseQuality(item);
+
+          if (item.sellIn < 6) {
+            item.quality = increaseQuality(item);
+          }
+          if (item.sellIn < 11) {
+            item.quality = increaseQuality(item);
+          }
+          if (item.sellIn < 0) {
+            item.quality = increaseQuality(item);
+          }
+        }
+
+        if (item.sellIn <= 0) {
+          item.quality = 0;
+        }
+
+        item.sellIn--;
+        if (item.quality > 50) {
+          item.quality = 50;
+        }
+        break
+      }
+
+      case BACKSTAGE: {
+        if (item.quality < 50) {
+          item.quality = increaseQuality(item);
+
+          if (item.sellIn < 6) {
+            item.quality = increaseQuality(item);
+          }
+          if (item.sellIn < 11) {
+            item.quality = increaseQuality(item);
+          }
+        }
+        if (item.sellIn <= 0) {
+          item.quality = 0;
+        }
+
+        item.sellIn--;
+        if (item.quality > 50) {
+          item.quality = 50;
+        }
+        break
+      }
+
+      case SULFURAS: {
+          if (item.sellIn < 0) {
+            item.quality = 0;
+          }
+        }
+        break
+      }
   });
   return items;
 }
