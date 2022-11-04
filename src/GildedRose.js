@@ -34,24 +34,14 @@ export function updateQuality(items) {
       }
     }
 
-    if ((AGED_BRIE === item.name || BACKSTAGE === item.name)) {
+    if (AGED_BRIE === item.name || BACKSTAGE === item.name) {
       if (item.quality < 50) {
         item.quality = increaseQuality(item);
-        if (AGED_BRIE === item.name) {
-          if (item.sellIn < 6) {
-            item.quality = increaseQuality(item);
-          }
-          if (item.sellIn < 11) {
-            item.quality = increaseQuality(item);
-          }
+        if (item.sellIn < 6) {
+          item.quality = increaseQuality(item);
         }
-        if (BACKSTAGE === item.name) {
-          if (item.sellIn < 11) {
-            item.quality = increaseQuality(item);
-          }
-          if (item.sellIn < 6) {
-            item.quality = increaseQuality(item);
-          }
+        if (item.sellIn < 11) {
+          item.quality = increaseQuality(item);
         }
       }
     }
@@ -70,7 +60,7 @@ export function updateQuality(items) {
           item.quality = item.quality - item.quality;
         }
       }
-      if ((AGED_BRIE === item.name)) {
+      if (AGED_BRIE === item.name) {
         if (item.quality < 50) {
           item.quality = increaseQuality(item);
         }
