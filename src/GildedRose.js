@@ -68,6 +68,9 @@ export function updateQuality(items) {
           item.quality = increaseQuality(item);
         }
       }
+      if (item.sellIn <= 0) {
+        item.quality = 0;
+      }
     }
 
     if (SULFURAS !== item.name) {
@@ -83,7 +86,7 @@ export function updateQuality(items) {
       }
     }
 
-    if (BACKSTAGE === item.name || SULFURAS === item.name) {
+    if (SULFURAS === item.name) {
       if (item.sellIn < 0) {
         item.quality = 0;
       }
